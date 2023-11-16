@@ -24,3 +24,9 @@ So you want to write an algorithm that can solve Wordle in as few turns as possi
 4. Run it: `python3 src/wordle_main.py --stragey={your class}`
 
 I have taken the liberty of implementing & wiring together `SimilarWordsStrategy` to show how you can wire your own algorithm in.
+
+## Forked Repo from pirpierreTklein/wordle_game
+
+- Used Rich to beautify UI output
+- Adjusted input and output to uppercase
+- Removed alphabet feature
