@@ -43,6 +43,7 @@ class Wordle:
         self.guesses = prev_guesses if prev_guesses else []
         self.num_tries_initial = num_tries_initial
         self.num_tries_remaining = num_tries_initial
+        self.formatted_guesses = []
 
     def _set_secret_word(self, secret_word: str) -> None:
         if len(secret_word) != self.word_len:
@@ -58,7 +59,7 @@ class Wordle:
     @classmethod
     def from_file(cls, path: str, num_tries_initial: int = 6, hard_mode=False) -> "Wordle":
         with open(path, "r") as file:
-            words = list(map(lambda x: x.strip(), file.readlines()))
+            words = list(map(lambda x: x.strip().upper(), file.readlines()))
             if not len(words):
                 # The word list must be non-empty
                 raise Exception(f'{path} has zero words.')
@@ -77,7 +78,7 @@ class Wordle:
 
     def is_valid_guess(self, guess_word: str) -> GuessValidation:
         if len(guess_word) != self.word_len:
-            return GuessValidation(False, f'{guess_word} is invalidd length.')
+            return GuessValidation(False, f'{guess_word} is invalid length.')
 
         if self.hard_mode:
             # Hard mode is where you need to use all letters that are IN_WORD or CORRECT.

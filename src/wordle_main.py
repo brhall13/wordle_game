@@ -1,6 +1,9 @@
 from typing import Optional
 from absl import app
 from absl import flags
+from rich.console import Console
+from rich import print
+from rich.style import Style
 
 
 from numpy import average, histogram
@@ -34,6 +37,8 @@ flags.DEFINE_bool('hard_mode', False, 'If true, play the hard-mode version of wo
 
 FLAGS = flags.FLAGS
 
+console = Console() 
+
 
 def pick_ai(game: Wordle, strategy: str) -> BaseStrategy:
     """Add your strategy in here."""
@@ -55,6 +60,9 @@ def play_one_round(game: Wordle, strategy: str, secret_word: Optional[str] = Non
     if secret_word:
         game.rig_game(secret_word)
     ai = pick_ai(game, strategy)
+    #guess = strategy.make_guess()
+    #result = game.evaluate_guess(guess)
+    #print(colorize_guess(guess, result))
     return ai.play_game()
 
 
